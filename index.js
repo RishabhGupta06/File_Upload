@@ -9,6 +9,16 @@ const app = express();
 const port = 8000;
 
 
+
+const storage = multer.diskStorage({
+    destination: function(req,file,cb){
+        return cb(null,'/uploads');
+    },
+    filename: function (req,file,cb){
+        return cb(null, `${Date.now()} - ${file.originalname}`);
+    },
+});
+
 app.set('view engine', 'ejs');
 app.set("views",path.resolve("./views"));
 
@@ -21,8 +31,10 @@ app.get("/",(req,res) =>{
     return res.render("home");
 })
 
-app.post("/upload",(req,res) =>{
+app.post("/upload",upload.single('profileimage'),(req,res) =>{
+    console.log(req.file);
 
+    return res.redirect("/");
 })
 
 
