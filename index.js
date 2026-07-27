@@ -14,8 +14,9 @@ app.use(express.json());
 
 
 app.get("/",(req,res) =>{
-    return res.render("homepage");
+    return res.render("home");
 })
+
 
 
 
